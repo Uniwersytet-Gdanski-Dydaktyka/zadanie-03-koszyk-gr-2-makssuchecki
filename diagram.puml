@@ -1,0 +1,71 @@
+@startuml
+
+class Product {
+    - code : String
+    - name : String
+    - price : double
+    - discountPrice : double
+    + getCode()
+    + getName()
+    + getPrice()
+    + getDiscountPrice()
+    + withDiscountPrice()
+}
+
+class ShoppingCart {
+    - products : List<Product>
+    + addProduct()
+    + removeProduct()
+    + getProducts()
+    + calculateTotalPrice()
+    + replaceProduct()
+    + sortProducts()
+}
+
+interface Promotion {
+    + apply(cart)
+    + getName()
+}
+
+class PercentageDiscountPromotion
+class Buy2Get1Promotion
+class FreeMugPromotion
+class ProductCouponPromotion
+
+class PromotionEngine {
+    - promotions : List<Promotion>
+    + addPromotion()
+    + applyPromotions()
+}
+
+class ProductFinder {
+    + findCheapest()
+    + findMostExpensive()
+    + findNCheapest()
+    + findNMostExpensive()
+}
+
+class ProductSorter {
+    + sortProducts()
+}
+
+class PriceDescendingComparator
+class NameComparator
+
+' Relacje
+
+ShoppingCart --> Product
+PromotionEngine --> Promotion
+
+Promotion <|.. PercentageDiscountPromotion
+Promotion <|.. Buy2Get1Promotion
+Promotion <|.. FreeMugPromotion
+Promotion <|.. ProductCouponPromotion
+
+ProductFinder --> Product
+ProductSorter --> Product
+
+PriceDescendingComparator --> Product
+NameComparator --> Product
+
+@enduml

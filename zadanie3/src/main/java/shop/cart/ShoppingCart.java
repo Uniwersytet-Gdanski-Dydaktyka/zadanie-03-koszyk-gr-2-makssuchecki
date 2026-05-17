@@ -15,11 +15,9 @@ public class ShoppingCart {
     }
 
     public void addProduct(Product product) {
-
-        if(product == null) {
-            throw new IllegalArgumentException("Product can't be null");
+        if (product == null) {
+            throw new IllegalArgumentException("Product cannot be null");
         }
-
         products.add(product);
     }
 
@@ -36,24 +34,21 @@ public class ShoppingCart {
     }
 
     public double calculateTotalPrice() {
-
         double sum = 0;
-
-        for(Product product : products) {
+        for (Product product : products) {
             sum += product.getDiscountPrice();
         }
-
         return sum;
     }
 
-    public void resetDiscounts() {
-
-        for(Product product : products) {
-            product.resetDiscountPrice();
+    public void replaceProduct(Product oldP, Product newP) {
+        int index = products.indexOf(oldP);
+        if (index != -1) {
+            products.set(index, newP);
         }
     }
 
     public void sortProducts(java.util.Comparator<Product> comparator) {
-        Collections.sort(products, comparator);
+        products.sort(comparator);
     }
 }

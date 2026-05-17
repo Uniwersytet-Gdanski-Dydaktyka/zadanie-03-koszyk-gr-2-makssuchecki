@@ -5,22 +5,26 @@ public class Product {
     private final String code;
     private final String name;
     private final double price;
-    private double discountPrice;
+    private final double discountPrice;
 
     public Product(String code, String name, double price) {
+        this(code, name, price, price);
+    }
 
-        if(code == null || name == null) {
-            throw new IllegalArgumentException("Code and name can't be null");
+    public Product(String code, String name, double price, double discountPrice) {
+
+        if (code == null || name == null) {
+            throw new IllegalArgumentException("Code and name cannot be null");
         }
 
-        if(price < 0) {
-            throw new IllegalArgumentException("Price can't be negative");
+        if (price < 0 || discountPrice < 0) {
+            throw new IllegalArgumentException("Price cannot be negative");
         }
 
         this.code = code;
         this.name = name;
         this.price = price;
-        this.discountPrice = price;
+        this.discountPrice = discountPrice;
     }
 
     public String getCode() {
@@ -39,17 +43,12 @@ public class Product {
         return discountPrice;
     }
 
-    public void setDiscountPrice(double discountPrice) {
-        this.discountPrice = discountPrice;
-    }
-
-    public void resetDiscountPrice() {
-        this.discountPrice = price;
+    public Product withDiscountPrice(double newPrice) {
+        return new Product(code, name, price, newPrice);
     }
 
     @Override
     public String toString() {
-        return name + " price=" + price +
-                " discountPrice=" + discountPrice;
+        return name + " price=" + price + " discountPrice=" + discountPrice;
     }
 }
