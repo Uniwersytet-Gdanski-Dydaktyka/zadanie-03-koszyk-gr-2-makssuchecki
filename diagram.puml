@@ -32,7 +32,7 @@ class Buy2Get1Promotion
 class FreeMugPromotion
 class ProductCouponPromotion
 
-class PromotionEngine {
+class PromotionService {
     - promotions : List<Promotion>
     + addPromotion()
     + applyPromotions()
@@ -45,27 +45,35 @@ class ProductFinder {
     + findNMostExpensive()
 }
 
-class ProductSorter {
-    + sortProducts()
-}
+interface Comparator
 
 class PriceDescendingComparator
 class NameComparator
 
-' Relacje
+' ===== RELACJE =====
 
+' Model
 ShoppingCart --> Product
-PromotionEngine --> Promotion
+
+' Promotion system
+PromotionService --> Promotion
+PromotionService ..> ShoppingCart
 
 Promotion <|.. PercentageDiscountPromotion
 Promotion <|.. Buy2Get1Promotion
 Promotion <|.. FreeMugPromotion
 Promotion <|.. ProductCouponPromotion
 
-ProductFinder --> Product
-ProductSorter --> Product
+Promotion ..> ShoppingCart
 
-PriceDescendingComparator --> Product
-NameComparator --> Product
+' Finder
+ProductFinder ..> Product
+
+' Comparator
+Comparator <|.. PriceDescendingComparator
+Comparator <|.. NameComparator
+
+PriceDescendingComparator ..> Product
+NameComparator ..> Product
 
 @enduml

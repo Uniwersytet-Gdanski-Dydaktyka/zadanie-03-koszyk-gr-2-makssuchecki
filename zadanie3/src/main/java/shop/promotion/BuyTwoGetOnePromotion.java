@@ -13,16 +13,20 @@ public class BuyTwoGetOnePromotion implements Promotion {
 
         List<Product> products = cart.getProducts();
 
-        if (products.size() < 3) {
+        int freeItems = products.size() / 3;
+
+        if (freeItems == 0){
             return;
         }
 
-        products.stream()
-                .min(Comparator.comparing(Product::getDiscountPrice))
-                .ifPresent(cheapest -> {
-                    Product newProduct = cheapest.withDiscountPrice(0);
-                    cart.replaceProduct(cheapest, newProduct);
-                });
+        List<Product> sorted = products.stream()
+                .sorted(Comparator.comparing(Product::getDiscountPrice))
+                .toList();
+        for (int i = 0; i<freeItems; i++){
+            Product cheapest = sorted.get(i);
+            Product discounted = cheapest.withDiscountPrice(0);
+            cart.replaceProduct(cheapest, discounted);
+        }
     }
 
     @Override

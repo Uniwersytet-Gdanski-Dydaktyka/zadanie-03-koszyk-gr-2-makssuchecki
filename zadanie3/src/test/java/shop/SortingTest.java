@@ -2,6 +2,7 @@ package shop;
 
 import org.junit.jupiter.api.Test;
 import shop.comparator.PriceDescendingComparator;
+import shop.comparator.NameComparator;
 import shop.model.Product;
 
 import java.util.ArrayList;
@@ -39,4 +40,19 @@ public class SortingTest {
 
         assertEquals("A", products.get(0).getName());
     }
+    @Test
+    public void shouldSortAlphabetically() {
+
+        List<Product> products = new ArrayList<>();
+
+        products.add(new Product("1", "B", 30));
+        products.add(new Product("2", "A", 50));
+        products.add(new Product("3", "C", 100));
+        products.add(new Product("4", "D", 10));
+        products.sort(new NameComparator());
+
+        assertEquals("A", products.get(0).getName());
+        assertEquals("C", products.get(2).getName());
+    }
+
 }

@@ -9,12 +9,9 @@ public class PercentPromotion implements Promotion {
     public void apply(ShoppingCart cart) {
 
         if (cart.calculateTotalPrice() > 300) {
-
             for (Product product : cart.getProducts()) {
-
                 Product newProduct =
                         product.withDiscountPrice(product.getDiscountPrice() * 0.95);
-
                 cart.replaceProduct(product, newProduct);
             }
         }

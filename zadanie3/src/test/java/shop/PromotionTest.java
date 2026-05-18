@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import shop.cart.ShoppingCart;
 import shop.model.Product;
 import shop.promotion.*;
-import shop.service.PromotionEngine;
+import shop.service.PromotionService;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PromotionTest {
@@ -48,7 +48,21 @@ public class PromotionTest {
 
         assertEquals(50, cart.calculateTotalPrice());
     }
+    @Test
+    public void shouldApplyBuy4Get2() {
 
+        ShoppingCart cart = new ShoppingCart();
+
+        cart.addProduct(new Product("1", "A", 10));
+        cart.addProduct(new Product("2", "B", 20));
+        cart.addProduct(new Product("3", "C", 30));
+        cart.addProduct(new Product("4", "A", 10));
+        cart.addProduct(new Product("5", "B", 20));
+        cart.addProduct(new Product("6", "C", 30));
+        new BuyTwoGetOnePromotion().apply(cart);
+
+        assertEquals(100, cart.calculateTotalPrice());
+    }
     @Test
     public void shouldNotApplyBuy2Get1WhenLessThan3() {
 
@@ -97,7 +111,7 @@ public class PromotionTest {
         cart.addProduct(new Product("2", "B", 150));
         cart.addProduct(new Product("3", "C", 50));
 
-        PromotionEngine engine = new PromotionEngine();
+        PromotionService engine = new PromotionService();
 
         engine.addPromotion(new PercentPromotion());
         engine.addPromotion(new BuyTwoGetOnePromotion());

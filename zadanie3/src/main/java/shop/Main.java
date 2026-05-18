@@ -34,14 +34,14 @@ public class Main {
             System.out.println(product);
         }
 
-        PromotionEngine engine = new PromotionEngine();
+        PromotionService service = new PromotionService();
 
-        engine.addPromotion(new PercentPromotion());
-        engine.addPromotion(new BuyTwoGetOnePromotion());
-        engine.addPromotion(new CouponPromotion("P3"));
-        engine.addPromotion(new FreeMugPromotion());
+        service.addPromotion(new PercentPromotion());
+        service.addPromotion(new BuyTwoGetOnePromotion());
+        service.addPromotion(new CouponPromotion("P3"));
+        service.addPromotion(new FreeMugPromotion());
 
-        engine.applyPromotions(cart);
+        service.applyPromotions(cart);
 
         System.out.println();
         System.out.println("After promotions:");

@@ -21,7 +21,21 @@ public class ShoppingCartTest {
                 cart.calculateTotalPrice()
         );
     }
+    @Test
+    public void shouldCalculateRemovedProduct() {
 
+        ShoppingCart cart = new ShoppingCart();
+        Product prod1 = new Product("1", "A", 100);
+        Product prod2 = new Product("2", "B", 200);
+        cart.addProduct(prod1);
+        cart.addProduct(prod2);
+        cart.removeProduct(prod1);
+
+        assertEquals(
+                200,
+                cart.calculateTotalPrice()
+        );
+    }
     @Test
     public void shouldReturnZeroForEmptyCart() {
 
@@ -30,6 +44,10 @@ public class ShoppingCartTest {
         assertEquals(
                 0,
                 cart.calculateTotalPrice()
+        );
+
+        assertTrue(
+                cart.isEmpty()
         );
     }
 }

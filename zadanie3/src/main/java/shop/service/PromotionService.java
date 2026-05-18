@@ -6,10 +6,10 @@ import shop.promotion.Promotion;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PromotionEngine {
+public class PromotionService {
     private final List<Promotion> promotions;
 
-    public PromotionEngine(){
+    public PromotionService(){
         promotions = new ArrayList<>();
     }
 

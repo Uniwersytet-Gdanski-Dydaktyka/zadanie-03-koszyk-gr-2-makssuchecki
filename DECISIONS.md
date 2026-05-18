@@ -14,5 +14,5 @@ zmiana ceny odbywa się przez metodę withDiscountPrice, która tworzy nowy obie
 Do sortowania użyto interfejsu Comparator
 
 ## 4 
-Kod obsługuje sytuacje brzegowe (pusty koszyk, produkt null, cena 0)
+Kod obsługuje sytuacje brzegowe (pusty koszyk, produkt null, ujemna cena)
 

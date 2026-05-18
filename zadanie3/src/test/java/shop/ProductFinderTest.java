@@ -52,4 +52,18 @@ public class ProductFinderTest {
         assertEquals(2, result.size());
         assertEquals("2", result.get(0).getCode());
     }
+    @Test
+    public void shouldReturnNMostExpensive() {
+
+        List<Product> products = List.of(
+                new Product("1", "A", 100),
+                new Product("2", "B", 50),
+                new Product("3", "C", 200)
+        );
+
+        List<Product> result = ProductFinder.findNMostExpensive(products, 2);
+
+        assertEquals(2, result.size());
+        assertEquals("3", result.get(0).getCode());
+    }
 }
